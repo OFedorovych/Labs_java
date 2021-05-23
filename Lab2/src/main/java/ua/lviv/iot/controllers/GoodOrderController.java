@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import ua.lviv.iot.Good;
 import ua.lviv.iot.service.GoodOrderService;
 
@@ -26,7 +27,6 @@ public class GoodOrderController {
         return goodOrderService.getGoods();
     }
 
-
     @PutMapping
     public Good createGood(@RequestBody Good good) {
         return goodOrderService.addGood(good);
@@ -40,14 +40,17 @@ public class GoodOrderController {
             return new ResponseEntity<Good>(HttpStatus.NOT_FOUND);
         }
     }
-
-    @DeleteMapping
-    public ResponseEntity<Good> deleteGood(@RequestBody Good good) {
-        if (goodOrderService.getGood(good.getId()) != null) {
-            goodOrderService.delGood(good);
-            return new ResponseEntity<Good>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<Good>(HttpStatus.NOT_FOUND);
-        }
+    @DeleteMapping(path = "/{id}")
+    public Good deleteGood(@PathVariable(name = "id") Integer id) {
+        return goodOrderService.delGood(id);
     }
+//    @DeleteMapping
+//    public ResponseEntity<Good> deleteGood(@RequestBody Good good) {
+//        if (goodOrderService.getGood(good.getId()) != null) {
+//            goodOrderService.delGood(good);
+//            return new ResponseEntity<Good>(HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<Good>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 }
