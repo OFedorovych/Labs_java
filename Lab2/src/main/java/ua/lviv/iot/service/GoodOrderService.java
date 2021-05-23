@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class GoodOrderService {
 
     private final AtomicInteger id = new AtomicInteger(0);
-
     private final Map<Integer, Good> goodsMap = new HashMap<Integer, Good>();
 
     public Good addGood(Good good) {
@@ -27,7 +26,6 @@ public class GoodOrderService {
 
     public Good updateGood(Good good) {
         return goodsMap.put(good.getId(), good);
-
     }
 
     public List<Good> getGoods() {
@@ -38,9 +36,12 @@ public class GoodOrderService {
         return goodsMap.get(id);
     }
 
-    public List<Good> delGood(Good good){
-        goodsMap.remove(good.getId(), good);
-        return goodsMap.values().stream().collect(Collectors.toList());
+//    public List<Good> delGood(Good good){
+//        goodsMap.remove(good.getId(), good);
+//        return goodsMap.values().stream().collect(Collectors.toList());
+//    }
+    public Good delGood(Integer id){
+        return goodsMap.remove(id);
     }
 }
 
